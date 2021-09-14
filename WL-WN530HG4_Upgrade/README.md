@@ -6,6 +6,7 @@ Resources for Unlocking the Full Potential of a $20 Wavlink WL-WN530HG4 (OpenWRT
 ## Table of Contents
 * [Materials](#materials)
 * [Procedure](#procedure)
+* [Resources](#resources)
 * [Questions](#questions)
 <!-- * [Concepts](#concepts) -->
 
@@ -45,7 +46,7 @@ This means that the Controller and Peripheral will <i>always</i> be out of sync 
         1. Change <code>reg = <0x50000 0x7b0000></code> to <code>reg = <0x50000 0xfb0000></code>
         2. The reasoning here being that we want to add <code>0x800000 (DEC:8388608) 8MB</code> to <code>0x7b0000</code>
 11. You should now see ~8.9MB (94%) available in the Software tab of OpenWRT
-    1. <code>df -h</code> reveals that /rom is using up 5.0M, so a total of 13.9/16.0MB is accounted for. Let's do the math:
+    1. <code>df -h</code> reveals that /rom is using up 5.0M and /overlay is using up 8.9M, so a total of 13.9/16.0MB is accounted for. Let's do the math using <code>mt7620a_wavlink_wl-wn530hg4.dts</code> or <code>cat /proc/mtd</code>
     2. Entire 16MB Flash: <code>0x1000000 (DEC:16777216) --> <u>16777216</u> / 1024 / 1024 = 16MB</code>
         1. Partition "u-boot": <code>0x0000000 (DEC:0) to 0x0030000 (DEC:196608) --> 196608 / 1024 = 192KB</code>
         2. Partition "config": <code>0x0030000 (DEC:196608) to 0x0040000 (DEC:262144) --> 65536 / 1024 = 64KB</code>
