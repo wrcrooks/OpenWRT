@@ -34,13 +34,13 @@ This means that the Controller and Peripheral will <i>always</i> be out of sync 
 4. You can either program the replacement NOR QSPI FLASH chip before soldering (see Steps 6 & 7) or wait until after it is on the board (as long as you have the clips for the programmer)
 5. Solder the replacement NOR QSPI FLASH chip onto the board in place of the now removed factory chip. *NOTE*: *Make sure pin one is in the same place as the factory chip (denoted by the dot on the IC)*
 6. Expand the stock bin file with f pairs to make it 16MB in size
-    1. Generate an empty bin file with the following command: <code>perl -e 'print "ff "x(16\*1024\*1024)'|xxd -r -p >16MB-EMPTY.bin</code> or download from [here](bin\16MB-EMPTY.bin)
-    2. Write the stock bin file to the front of the empty bin file with the following command: <code>dd if=\<ReadFactoryBin\> of=16MB-EMPTY.bin conv=notrunc</code> or download from [here](bin\16MB-FACTORY-WN530HG4.bin) *NOTE*: *This factory firmware was shipped with my unit and may be outdated*
+    1. Generate an empty bin file with the following command: <code>perl -e 'print "ff "x(16\*1024\*1024)'|xxd -r -p >16MB-EMPTY.bin</code> or download from [here](https://github.com/wrcrooks/OpenWRT/blob/main/WL-WN530HG4_Upgrade/bin/16MB-EMPTY.bin)
+    2. Write the stock bin file to the front of the empty bin file with the following command: <code>dd if=\<ReadFactoryBin\> of=16MB-EMPTY.bin conv=notrunc</code> or download from [here](https://github.com/wrcrooks/OpenWRT/blob/main/WL-WN530HG4_Upgrade/bin/16MB-FACTORY-WN530HG4.bin) *NOTE*: *This factory firmware was shipped with my unit and may be outdated*
     3. Rename file something identifiable, EX: *16MB-FACTORY-WN530HG4.bin*
 7. Flash the expanded stock bin file to the replacement NOR QSPI FLASH chip
 8. Boot the device
-9. Load initramfs OpenWRT build [link](http://downloads.openwrt.org/releases/21.02.0/targets/ramips/mt7620/openwrt-21.02.0-ramips-mt7620-wavlink_wl-wn530hg4-initramfs-kernel.bin) renamed to *WN530HG4-WAVLINK.bin*, also located [here](bin\WN530HG4-WAVLINK.bin)
-10. Upgrade OpenWRT to squashfs [provided](bin\openwrt-ramips-mt7620-wavlink_wl-wn530hg4-squashfs-sysupgrade.bin) or custom compile your own with below modification
+9. Load initramfs OpenWRT build [link](http://downloads.openwrt.org/releases/21.02.0/targets/ramips/mt7620/openwrt-21.02.0-ramips-mt7620-wavlink_wl-wn530hg4-initramfs-kernel.bin) renamed to *WN530HG4-WAVLINK.bin*, also located [here](https://github.com/wrcrooks/OpenWRT/blob/main/WL-WN530HG4_Upgrade/bin/WN530HG4-WAVLINK.bin)
+10. Upgrade OpenWRT to squashfs [provided](https://github.com/wrcrooks/OpenWRT/blob/main/WL-WN530HG4_Upgrade/bin/openwrt-ramips-mt7620-wavlink_wl-wn530hg4-squashfs-sysupgrade.bin) or custom compile your own with below modification
     1. Modify Line 83 of file <code>$BUILD_DIR/target/ramips/dts/mt7620a_wavlink_wl-wn530hg4.dts</code>
         1. Change <code>reg = <0x50000 0x7b0000></code> to <code>reg = <0x50000 0xfb0000></code>
         2. The reasoning here being that we want to add <code>0x800000 (DEC:8388608) 8MB</code> to <code>0x7b0000</code>
@@ -54,8 +54,9 @@ This means that the Controller and Peripheral will <i>always</i> be out of sync 
     3. Summary: <code>196608 + 65536 + 65536 + 16449536 = <u>16777216</u></code>
         1. The compiled squashfs image is 7.1MB in size so the remaining 8.9MB makes sense
 
+## Resources
+https://openwrt.org/toh/hwdata/wavlink/wavlink_wl-wn530hg4
 
 ## Questions
-
 GitHub: [@wrcrooks](https://www.github.com/wrcrooks)\
 Website: [willcrooks.net](http://www.willcrooks.net)
