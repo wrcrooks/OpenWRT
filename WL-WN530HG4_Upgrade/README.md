@@ -29,7 +29,7 @@ This means that the Controller and Peripheral will <i>always</i> be out of sync 
 
 ## Procedure
 1. Disassemble router using a flat blade screwdriver and flat objects (such as plastic cards) to split two halves of the outer casing
-    1. There were two plastic posts on the inside of my unit that had to be cut with some thin wire cutters that can reach
+    1. There were two plastic posts on the inside of my unit that had screws through them, accessible from under the label on the bottom
 2. Using the USB CH341A Programmer and flashrom CLI utility (Linux) or AsProgrammer (Windows), make a backup of the stock Wavlink firmware (this will also be modified in the next step)
 3. Remove the factory NOR SPI FLASH chip using a soldering iron and wick (preferred) or a heat gun
 4. You can either program the replacement NOR QSPI FLASH chip before soldering (see Steps 6 & 7) or wait until after it is on the board (as long as you have the clips for the programmer)
